@@ -1,0 +1,37 @@
+version: "3.7"
+
+networks:
+  my_network:
+    driver: bridge
+    name: my_network
+
+volumes:
+  pgdata:
+
+services:
+  thym_database:
+    image: postgres:14.0-alpine
+    container_name: thym_database
+    ports:
+      - 15432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - my_network
+    environment:
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=test
+      - POSTGRES_DB=test_db
+
+  address:
+    build: .
+    image: address
+    container_name: address
+    ports:
+      - 8080:8080
+    networks:
+      - my_network
+    depends_on:
+      - thym_database
+    environment:
+      POSTGRE_DB: thym_database:5432

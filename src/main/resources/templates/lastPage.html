@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div th:replace="fragments/layout :: head"></div>
+    <title id="pageTitle">Last Page</title>
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div class="container">
+    <h2>Last page</h2>
+
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">City</th>
+            <th scope="col">District</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="addr: ${list}">
+            <td th:text="${addr.id}"></td>
+            <td th:text="${addr.city}"></td>
+            <td th:text="${addr.district}" />
+        </tr>
+        </tbody>
+    </table>
+
+
+
+    <div th:insert="fragments/footer :: footer"></div>
+</div>
+
+
+</body>
+</html>
